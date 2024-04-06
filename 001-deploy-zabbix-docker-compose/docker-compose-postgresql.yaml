@@ -1,0 +1,36 @@
+version: "3.9"
+
+x-deploy: &template-deploy
+  replicas: 1
+  restart_policy:
+      condition: any
+  update_config:
+      parallelism: 1
+      delay: 10s
+
+services:
+  django_db:
+    image: postgres:15
+    networks:
+      - "monitoring-network"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+      #- ./confs/postgresql/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+    environment:
+      - POSTGRES_USER=zabbix
+      - POSTGRES_PASSWORD=zabbix
+      - POSTGRES_DB=zabbix
+    deploy: *template-deploy
+  adminer:
+    image: adminer
+    networks:
+      - "monitoring-network"
+    ports:
+      - 8090:8080
+    deploy: *template-deploy
+
+networks:
+    monitoring-network:
+        external: True
