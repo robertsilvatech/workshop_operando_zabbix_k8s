@@ -58,8 +58,6 @@ spec:
             value: zabbix
           - name: POSTGRES_PASSWORD
             value: zabbix
-          #- name: POSTGRES_DB
-          #  value: zabbix
 ---
 apiVersion: apps/v1
 kind: Deployment
