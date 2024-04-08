@@ -58,5 +58,29 @@ spec:
             value: zabbix
           - name: POSTGRES_PASSWORD
             value: zabbix
-          - name: POSTGRES_DB
-            value: zabbix
+          #- name: POSTGRES_DB
+          #  value: zabbix
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: adminer
+    project: zabbix
+  name: adminer
+  namespace: plataforma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adminer
+  template:
+    metadata:
+      labels:
+        app: adminer
+        project: zabbix
+    spec:
+      containers:
+      - image: adminer
+        name: adminer
+        resources: {}
