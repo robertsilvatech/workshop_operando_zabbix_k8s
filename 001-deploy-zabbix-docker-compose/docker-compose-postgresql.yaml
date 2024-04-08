@@ -9,15 +9,14 @@ x-deploy: &template-deploy
       delay: 10s
 
 services:
-  django_db:
+  zabbix_db:
     image: postgres:15
     networks:
       - "monitoring-network"
     ports:
       - "5432:5432"
     volumes:
-      - ./db-data:/var/lib/postgresql/data
-      #- ./confs/postgresql/pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
+      - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=zabbix
       - POSTGRES_PASSWORD=zabbix
@@ -32,5 +31,9 @@ services:
     deploy: *template-deploy
 
 networks:
-    monitoring-network:
-        external: True
+  monitoring-network:
+    external: True
+
+volumes:
+  postgres-data:
+    external: true
