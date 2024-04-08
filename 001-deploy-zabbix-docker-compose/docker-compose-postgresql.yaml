@@ -20,7 +20,6 @@ services:
     environment:
       - POSTGRES_USER=zabbix
       - POSTGRES_PASSWORD=zabbix
-      - POSTGRES_DB=zabbix
     deploy: *template-deploy
   adminer:
     image: adminer
