@@ -5,7 +5,6 @@ metadata:
     app: zabbix-web
     project: zabbix
   name: zabbix-web
-  namespace: plataforma
 spec:
   ports:
   - name: trapper
